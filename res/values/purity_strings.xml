@@ -658,4 +658,7 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <!-- Notification settings -->
     <string name="notification_settings_title">Notifications</string>
     <string name="notification_settings_summary">Customize the way you recieve notifications with options like Hover, Heads up and more</string>
+
+    <!-- SuperSU header name - the app hides itself from launcher based on this resource name being present in com.android.settings -->
+    <string name="supersu_title">SuperSU</string>
 </resources>
