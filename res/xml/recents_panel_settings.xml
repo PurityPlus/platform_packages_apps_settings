@@ -47,7 +47,6 @@
                 android:entries="@array/recent_panel_scale_entries"
                 android:entryValues="@array/recent_panel_scale_values"
                 android:title="@string/recent_panel_scale_title"
-                android:summary="@string/recent_panel_scale_summary"
                 android:persistent="false" />
 
         <ListPreference
