@@ -84,6 +84,7 @@ public class RecentsPanelSettings extends SettingsPreferenceFragment implements
         String recentPanelScale = Settings.System.getString(resolver, Settings.System.RECENT_PANEL_SCALE_FACTOR);
         if (recentPanelScale != null) {
             mRecentPanelScale.setValue(recentPanelScale);
+            mRecentPanelScale.setSummary(mRecentPanelScale.getEntry());
         }
         mRecentPanelScale.setOnPreferenceChangeListener(this);
 
@@ -151,6 +152,7 @@ public class RecentsPanelSettings extends SettingsPreferenceFragment implements
             int value = Integer.parseInt((String) newValue);
             Settings.System.putInt(getContentResolver(),
                     Settings.System.RECENT_PANEL_SCALE_FACTOR, value);
+            updateRecentPanelScaleOptions(newValue);
             return true;
         } else if (preference == mRecentPanelExpandedMode) {
             int value = Integer.parseInt((String) newValue);
@@ -164,5 +166,13 @@ public class RecentsPanelSettings extends SettingsPreferenceFragment implements
             return true;
         }
         return false;
+    }
+
+    private void updateRecentPanelScaleOptions(Object newValue) {
+        int index = mRecentPanelScale.findIndexOfValue((String) newValue);
+        int value = Integer.valueOf((String) newValue);
+        Settings.Secure.putInt(getActivity().getContentResolver(),
+                Settings.System.RECENT_PANEL_SCALE_FACTOR, value);
+        mRecentPanelScale.setSummary(mRecentPanelScale.getEntries()[index]);
     }
 }
