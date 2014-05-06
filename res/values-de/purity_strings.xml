@@ -429,8 +429,106 @@
     <string name="lock_pattern_size_5">5x5</string>
     <string name="lock_pattern_size_6">6x6</string>
 
+    <!-- Smaller QS -->
     <string name="title_qs_hide_text">Text in der Überschrift verbergen</string>
     <string name="summary_qs_hide_text">Erlaubt mehr Icons pro Zeile</string>
-    <string name="see_through_title">Durchsichtig</string>
-    <string name="see_through_summary">Zeigt den Inhalt hinter deiner Bildschirmsperre , deine Daten können dadurch sichtbar sein</string>
+
+    <!-- Volume Keys Media Control -->
+    <string name="volume_keys_control_media_stream">Medien</string>
+    <string name="volume_keys_control_media_stream_summary">Lautstärketasten steuern Medienlautstärke bevorzugt vor Benachrichtigungslautstärke</string>
+
+    <!-- Message of dialog confirming that user wants to restart their device with a new runtime -->
+    <string name="custom_runtime_warning_title">Warnung</string>
+
+    <!-- Menu label for reset the battery stats -->
+    <string name="menu_stats_reset">Zurücksetzen</string>
+
+    <!-- Status bar double-tap to sleep -->
+    <string name="status_bar_double_tap_to_sleep_title">Standby durch doppeltes Tippen</string>
+
+    <string name="increasing_ring_title">Ansteigender Klingelton</string>
+    <!-- Sound settings screen, the caption of the checkbox for making incoming calls increase in volume -->
+    <string name="checkbox_increasing_ring">Aktivieren</string>
+    <!-- Sound settings screen, the title of the volume bar to adjust the minimum increasing ring volume -->
+    <string name="increasing_ring_min_volume_title">Anfangslautstärke</string>
+    <string name="increasing_ring_volume_notice">Hinweis:\nDa die Anfangslautstärke größer als die Klingeltonlautstärke ist, wird der Klingelton mit der Klingeltonlautstärke abgespielt.</string>
+    <string name="increasing_ring_interval_title">Intervall ändern</string>
+    <string name="increasing_ring_interval_eachring">Bei jedem Klingelton</string>
+    <string name="increasing_ring_interval_half_second">0.5 Sekunden</string>
+    <string name="increasing_ring_interval_1second">1 Sekunde</string>
+    <string name="increasing_ring_interval_2seconds">2 Sekunden</string>
+    <string name="increasing_ring_interval_3seconds">3 Sekunden</string>
+    <string name="increasing_ring_interval_5seconds">5 Sekunden</string>
+    <string name="increasing_ring_interval_10seconds">10 Sekunden</string>
+
+    <!-- Enable power menu -->
+    <string name="lockscreen_enable_power_menu_title">Ausschalt-Menü aktivieren</string>
+    <string name="lockscreen_enable_power_menu_summary">Ausschalt-Menü anzeigen, wenn der Bildschirm gesperrt ist</string>
+
+    <!-- Automatic brightness customization -->
+    <string name="auto_brightness_setup_title">Automatische Helligkeit</string>
+    <string name="auto_brightness_adjustment_title">Helligkeits-Einstellungen</string>
+    <string name="auto_brightness_twilight_adjustment">An Dämmerung anpassen</string>
+    <string name="light_sensor_current_value">Aktueller Sensorwert: <xliff:g id="light_level">%d</xliff:g> Lux</string>
+    <string name="auto_brightness_dialog_title">Helligkeitsstufen</string>
+    <string name="auto_brightness_level_format"><xliff:g id="level">%1$d</xliff:g> Lux</string>
+    <string name="auto_brightness_last_level_format"><xliff:g id="level">%1$d</xliff:g> -\n\u221e Lux</string>
+    <string name="auto_brightness_brightness_format" translatable="false"><xliff:g id="percent">%s</xliff:g>%%</string>
+    <string name="auto_brightness_adjust_button">Anpassen</string>
+    <string name="auto_brightness_close_button">Schließen</string>
+    <string name="auto_brightness_reset_button">Zurücksetzen</string>
+    <string name="auto_brightness_split_dialog_title">Helligkeitsstufe aufteilen</string>
+    <string name="auto_brightness_level_dialog_title">Helligkeitsstufe</string>
+    <string name="auto_brightness_lux">Umgebungshelligkeit (Lux)</string>
+    <string name="auto_brightness_backlight">Bildschirmhelligkeit (%)</string>
+    <string name="auto_brightness_reset_dialog_title">Helligkeitsstufen zurücksetzen?</string>
+    <string name="auto_brightness_reset_confirmation">Alle Helligkeitsstufen werden auf ihre Standardwerte zurückgesetzt.</string>
+    <string name="auto_brightness_split_lux_format">Teilungsoption (zwischen <xliff:g id="min">%1$d</xliff:g> und <xliff:g id="max">%2$d</xliff:g> Lux)</string>
+    <string name="auto_brightness_level_options">Aktionen</string>
+    <string name="auto_brightness_menu_edit">Bearbeiten</string>
+    <string name="auto_brightness_menu_split">Aufteilen</string>
+    <string name="auto_brightness_menu_remove">Entfernen</string>
+    <string name="auto_brightness_preview">Vorschau</string>
+    <string name="auto_brightness_preview_dialog_title">Helligkeitsverlauf-Vorschau</string>
+    <string name="auto_brightness_help_text"><b>Wie wird die Helligkeit berechnet?</b>
+\n\n
+Der Verlauf der Helligkeit wird durch eine <i>kubische Interpolation</i> anhand der
+gegebenen Anzahl an <i>Stützstellen</i> berechnet - anders als gemeinhin angenommen, wird
+einem bestimmten Umgebungshelligkeitsbereich nicht eine konstante Bildschirmhelligkeit
+zugeordnet. Durch diese Art der Berechnung verursachen kleine Änderungen der Umgebungshelligkeit
+keine großen Sprünge der Bildschirmhelligkeit.\n
+Da die Abschätzung des exakten Verlaufs allerdings nicht ganz einfach ist, kann der berechnete
+Verlauf im Vorschaufenster betrachtet werden. Die Vorschau zeigt den Verlauf mit <i>logarithmischer</i>
+Skalierung, so dass alle Stützstellen unterscheidbar sind. Bei Verwendung einer linearen Skalierung
+wären die tendenziell wichtigeren Stützstellen im unteren Bereich der Umgebungshelligkeit nicht
+zu unterscheiden.
+\n\n
+<b>Wie kann der Helligkeitsverlauf verändert werden?</b>
+\n\n
+Jede Zeile in der Helligkeitsliste entspricht einer <i>Stützstelle</i> des Helligkeitsverlaufs.
+Der Bildschirmhelligkeitswert der Stützstelle kann mittels des Schiebereglers in der Zeile
+verändert werden. Während des Schiebens wird die momentane Bildschirmhelligkeit auf den gewählten
+Wert eingestellt, um die gewählte Helligkeit abschätzen zu können.\n
+Durch langes Drücken auf die Zeilen stehen weitere Optionen zur Verfügung. Durch Auswahl von
+\"Bearbeiten\" können sowohl der Umgebungshelligkeitswert der Stützstelle verändert als auch der
+Bildschirmhelligkeitswert manuell eingegeben werden. Die Auswahl von \"Helligkeitsstufe aufteilen\"
+erlaubt die Duplizierung einer Zeile in eine zweite Zeile, um zusätzliche Stützstellen hinzuzufügen.
+Mittels \"Entfernen\" kann die ausgewählte Stützstelle aus dem Helligkeitsverlauf entfernt werden.
+    </string>
+
+    <string name="auto_brightness_sensitivity_title">Regelungsträgheit</string>
+    <string name="auto_brightness_sensitivity_verylow">Sehr träge</string>
+    <string name="auto_brightness_sensitivity_low">Träge</string>
+    <string name="auto_brightness_sensitivity_medium">Normal</string>
+    <string name="auto_brightness_sensitivity_high">Flink</string>
+    <string name="auto_brightness_sensitivity_veryhigh">Sehr flink</string>
+
+    <!-- Lockscreen background -->
+    <string name="lockscreen_background">Hintergrund</string>
+    <string name="lockscreen_background_style_title">Sperrbildschirm-Hintergrund</string>
+    <string name="background_default">Standardhintergrund</string>
+    <string name="background_wallpaper">Benutzerdefinierter Hintergrund</string>
+    <string name="background_result_successful">Hintergrund wurde geändert</string>
+    <string name="background_result_not_successful">Hintergrund wurde nicht geändert</string>
+    <string name="setting_lockscreen_background">Hintergrund anwenden</string>
 </resources>
