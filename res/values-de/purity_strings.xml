@@ -317,8 +317,7 @@
 
     <!-- kill app long press back -->
     <string name="kill_app_longpress_back">Zurück-Taste beendet App</string>
-    <string name="kill_app_longpress_back_summary">Kill the foreground app by long-pressing the back key
-	Beendet die App im Vorderung durch langes Betätigen der Zurück-Taste</string>
+    <string name="kill_app_longpress_back_summary">Beendet die App im Vordergrung durch langes Betätigen der Zurück-Taste</string>
 
     <!-- Category title for Charging sounds (Power state change) specific Settings.
          [CHAR LIMIT=40] -->
@@ -531,4 +530,7 @@ Mittels \"Entfernen\" kann die ausgewählte Stützstelle aus dem Helligkeitsverl
     <string name="background_result_successful">Hintergrund wurde geändert</string>
     <string name="background_result_not_successful">Hintergrund wurde nicht geändert</string>
     <string name="setting_lockscreen_background">Hintergrund anwenden</string>
+
+    <!-- Navigation bar glow time -->
+    <string name="navigation_button_glow_time_title">Leuchtdauer</string>
 </resources>
