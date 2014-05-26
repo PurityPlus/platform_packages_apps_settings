@@ -547,4 +547,17 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <!-- Themes settings  -->
     <string name="themes_settings_title">Themes</string>
     <string name="themes_settings_summary">Change themes with T-Mobiles theme engine</string>
+
+    <!--Notification category-->
+    <string name="notification_category">Notifications</string>
+    <!--Notification peek-->
+    <string name="notification_peek_title">Notification peek</string>
+    <string name="notification_peek_summary">Show latest notification after picking up your device</string>
+    <string name="peek_pickup_timeout_title">Peek pickup timeout</string>
+    <string name="peek_pickup_15seconds">15 seconds (default)</string>
+    <string name="peek_pickup_30seconds">30 seconds</string>
+    <string name="peek_pickup_45seconds">45 seconds</string>
+    <string name="peek_pickup_60seconds">1 minute</string>
+    <string name="peek_pickup_120seconds">2 minutes</string>
+
 </resources>
