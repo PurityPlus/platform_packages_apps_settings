@@ -37,6 +37,7 @@ import android.graphics.Point;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.os.ParcelFileDescriptor;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
@@ -62,6 +63,7 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
     private static final String KEY_ENABLE_WIDGETS = "keyguard_enable_widgets";
     private static final String KEY_ENABLE_CAMERA = "keyguard_enable_camera";
     private static final String LOCKSCREEN_BACKGROUND_STYLE = "lockscreen_background_style";
+    private static final String KEY_PEEK_PICKUP_TIMEOUT = "peek_pickup_timeout";
 
     private static final String LOCKSCREEN_WALLPAPER_TEMP_NAME = ".lockwallpaper";
 
@@ -69,6 +71,7 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
     private CheckBoxPreference mEnableKeyguardWidgets;
     private CheckBoxPreference mEnableCameraWidget;
     private ListPreference mLockBackground;
+    private ListPreference mPeekPickupTimeout;
 
     private ChooseLockSettingsHelper mChooseLockSettingsHelper;
     private LockPatternUtils mLockUtils;
@@ -92,6 +95,14 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
         // Find preferences
         mEnableKeyguardWidgets = (CheckBoxPreference) findPreference(KEY_ENABLE_WIDGETS);
         mEnableCameraWidget = (CheckBoxPreference) findPreference(KEY_ENABLE_CAMERA);
+
+        mPeekPickupTimeout = (ListPreference) findPreference(KEY_PEEK_PICKUP_TIMEOUT);
+        int peekTimeout = Settings.System.getIntForUser(getContentResolver(),
+                Settings.System.PEEK_PICKUP_TIMEOUT, 0, UserHandle.USER_CURRENT);
+        mPeekPickupTimeout.setValue(String.valueOf(peekTimeout));
+        mPeekPickupTimeout.setSummary(mPeekPickupTimeout.getEntry());
+        mPeekPickupTimeout.setOnPreferenceChangeListener(this);
+
 
         // Remove/disable custom widgets based on device RAM and policy
         if (ActivityManager.isLowRamDeviceStatic()) {
@@ -167,9 +178,26 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
         if (preference == mLockBackground) {
             int index = mLockBackground.findIndexOfValue((String) objValue);
             handleBackgroundSelection(index);
+            return true;
+        } else if (preference == mPeekPickupTimeout) {
+            int peekTimeout = Integer.valueOf((String) objValue);
+            Settings.System.putIntForUser(getContentResolver(),
+                Settings.System.PEEK_PICKUP_TIMEOUT,
+                    peekTimeout, UserHandle.USER_CURRENT);
+            updatePeekTimeoutOptions(objValue);
+            return true;
         }
         return false;
     }
+
+    private void updatePeekTimeoutOptions(Object newValue) {
+        int index = mPeekPickupTimeout.findIndexOfValue((String) newValue);
+        int value = Integer.valueOf((String) newValue);
+        Settings.Secure.putInt(getActivity().getContentResolver(),
+                Settings.System.PEEK_PICKUP_TIMEOUT, value);
+        mPeekPickupTimeout.setSummary(mPeekPickupTimeout.getEntries()[index]);
+    }
+
 
    /**
      * Checks if a specific policy is disabled by a device administrator, and disables the
