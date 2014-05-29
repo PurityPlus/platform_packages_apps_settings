@@ -64,7 +64,6 @@
     <PreferenceScreen
         android:key="recents_panel"
         android:title="@string/recents_panel_settings_title"
-        android:summary="@string/recents_panel_settings_summary"
         android:icon="@drawable/ic_settings_recents"  
         android:fragment="com.android.settings.purity.RecentsPanelSettings" />
 

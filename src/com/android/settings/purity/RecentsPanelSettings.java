@@ -18,28 +18,34 @@
 
 package com.android.settings.purity;
 
-import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.R;
-
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.RemoteException;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
-import android.provider.Settings.SettingNotFoundException;
 import android.util.Log;
+import android.view.WindowManagerGlobal;
+import com.android.settings.R;
+import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.Utils;
+
+import com.android.settings.purity.util.Helpers;
 
 public class RecentsPanelSettings extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener {
     private static final String TAG = "RecentsPanelSettings";
 
+    private static final String CUSTOM_RECENT_MODE = "custom_recent_mode";
     private static final String RECENT_MENU_CLEAR_ALL = "recent_menu_clear_all";
     private static final String RECENT_MENU_CLEAR_ALL_LOCATION = "recent_menu_clear_all_location";
 
+    private CheckBoxPreference mRecentsCustom;
     private CheckBoxPreference mRecentClearAll;
     private ListPreference mRecentClearAllPosition;
 
@@ -50,6 +56,12 @@ public class RecentsPanelSettings extends SettingsPreferenceFragment implements
 
         PreferenceScreen prefSet = getPreferenceScreen();
         ContentResolver resolver = getActivity().getContentResolver();
+
+        boolean enableRecentsCustom = Settings.System.getBoolean(getActivity().getContentResolver(),
+                                      Settings.System.CUSTOM_RECENT_TOGGLE, false);
+        mRecentsCustom = (CheckBoxPreference) findPreference(CUSTOM_RECENT_MODE);
+        mRecentsCustom.setChecked(enableRecentsCustom);
+        mRecentsCustom.setOnPreferenceChangeListener(this);
 
         mRecentClearAll = (CheckBoxPreference) prefSet.findPreference(RECENT_MENU_CLEAR_ALL);
         mRecentClearAll.setChecked(Settings.System.getInt(resolver,
@@ -73,13 +85,18 @@ public class RecentsPanelSettings extends SettingsPreferenceFragment implements
         if (preference == mRecentClearAll) {
             boolean value = (Boolean) objValue;
             Settings.System.putInt(resolver, Settings.System.SHOW_CLEAR_RECENTS_BUTTON, value ? 1 : 0);
+            return true;
         } else if (preference == mRecentClearAllPosition) {
             String value = (String) objValue;
             Settings.System.putString(resolver, Settings.System.CLEAR_RECENTS_BUTTON_LOCATION, value);
-        } else {
-            return false;
+            return true;
+        } else if (preference == mRecentsCustom) { // Enable||disable Slim Recent
+            Settings.System.putBoolean(resolver,
+                    Settings.System.CUSTOM_RECENT_TOGGLE,
+                    ((Boolean) objValue) ? true : false);
+            Helpers.restartSystemUI();
+            return true;
         }
-
-        return true;
+        return false;
     }
 }
