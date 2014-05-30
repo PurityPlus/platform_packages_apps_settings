@@ -45,12 +45,14 @@ public class RecentsPanelSettings extends SettingsPreferenceFragment implements
     private static final String CUSTOM_RECENT_MODE = "custom_recent_mode";
     private static final String RECENT_PANEL_LEFTY_MODE = "recent_panel_lefty_mode";
     private static final String RECENT_PANEL_SCALE = "recent_panel_scale";
+    private static final String RECENT_PANEL_EXPANDED_MODE = "recent_panel_expanded_mode";
     private static final String RECENT_MENU_CLEAR_ALL = "recent_menu_clear_all";
     private static final String RECENT_MENU_CLEAR_ALL_LOCATION = "recent_menu_clear_all_location";
 
     private CheckBoxPreference mRecentsCustom;
     private CheckBoxPreference mRecentPanelLeftyMode;
     private ListPreference mRecentPanelScale;
+    private ListPreference mRecentPanelExpandedMode;
     private CheckBoxPreference mRecentClearAll;
     private ListPreference mRecentClearAllPosition;
 
@@ -78,6 +80,13 @@ public class RecentsPanelSettings extends SettingsPreferenceFragment implements
         }
         mRecentPanelScale.setOnPreferenceChangeListener(this);
 
+        mRecentPanelExpandedMode = (ListPreference) findPreference(RECENT_PANEL_EXPANDED_MODE);
+        String recentPanelExpandedMode = Settings.System.getString(resolver, Settings.System.RECENT_PANEL_EXPANDED_MODE);
+        if (recentPanelExpandedMode != null) {
+            mRecentPanelExpandedMode.setValue(recentPanelScale);
+        }
+        mRecentPanelExpandedMode.setOnPreferenceChangeListener(this);
+
         mRecentClearAll = (CheckBoxPreference) prefSet.findPreference(RECENT_MENU_CLEAR_ALL);
         mRecentClearAll.setChecked(Settings.System.getInt(resolver,
             Settings.System.SHOW_CLEAR_RECENTS_BUTTON, 1) == 1);
@@ -97,10 +106,11 @@ public class RecentsPanelSettings extends SettingsPreferenceFragment implements
         if (customRecent == false) {
             mRecentPanelLeftyMode.setEnabled(false);
             mRecentPanelScale.setEnabled(false);
+            mRecentPanelExpandedMode.setEnabled(false);
         } else {
             mRecentPanelLeftyMode.setEnabled(true);
             mRecentPanelScale.setEnabled(true);
-
+            mRecentPanelExpandedMode.setEnabled(true);
         }
     }
 
@@ -130,6 +140,11 @@ public class RecentsPanelSettings extends SettingsPreferenceFragment implements
             int value = Integer.parseInt((String) newValue);
             Settings.System.putInt(getContentResolver(),
                     Settings.System.RECENT_PANEL_SCALE_FACTOR, value);
+            return true;
+        } else if (preference == mRecentPanelExpandedMode) {
+            int value = Integer.parseInt((String) newValue);
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.RECENT_PANEL_EXPANDED_MODE, value);
             return true;
         } else if (preference == mRecentPanelLeftyMode) {
             Settings.System.putInt(getContentResolver(),
