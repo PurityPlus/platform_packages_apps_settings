@@ -30,6 +30,7 @@ import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.WindowManagerGlobal;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
@@ -42,10 +43,14 @@ public class RecentsPanelSettings extends SettingsPreferenceFragment implements
     private static final String TAG = "RecentsPanelSettings";
 
     private static final String CUSTOM_RECENT_MODE = "custom_recent_mode";
+    private static final String RECENT_PANEL_LEFTY_MODE = "recent_panel_lefty_mode";
+    private static final String RECENT_PANEL_SCALE = "recent_panel_scale";
     private static final String RECENT_MENU_CLEAR_ALL = "recent_menu_clear_all";
     private static final String RECENT_MENU_CLEAR_ALL_LOCATION = "recent_menu_clear_all_location";
 
     private CheckBoxPreference mRecentsCustom;
+    private CheckBoxPreference mRecentPanelLeftyMode;
+    private ListPreference mRecentPanelScale;
     private CheckBoxPreference mRecentClearAll;
     private ListPreference mRecentClearAllPosition;
 
@@ -63,6 +68,16 @@ public class RecentsPanelSettings extends SettingsPreferenceFragment implements
         mRecentsCustom.setChecked(enableRecentsCustom);
         mRecentsCustom.setOnPreferenceChangeListener(this);
 
+        mRecentPanelLeftyMode = (CheckBoxPreference) findPreference(RECENT_PANEL_LEFTY_MODE);
+        mRecentPanelLeftyMode.setOnPreferenceChangeListener(this);
+
+        mRecentPanelScale = (ListPreference) findPreference(RECENT_PANEL_SCALE);
+        String recentPanelScale = Settings.System.getString(resolver, Settings.System.RECENT_PANEL_SCALE_FACTOR);
+        if (recentPanelScale != null) {
+            mRecentPanelScale.setValue(recentPanelScale);
+        }
+        mRecentPanelScale.setOnPreferenceChangeListener(this);
+
         mRecentClearAll = (CheckBoxPreference) prefSet.findPreference(RECENT_MENU_CLEAR_ALL);
         mRecentClearAll.setChecked(Settings.System.getInt(resolver,
             Settings.System.SHOW_CLEAR_RECENTS_BUTTON, 1) == 1);
@@ -75,26 +90,51 @@ public class RecentsPanelSettings extends SettingsPreferenceFragment implements
         mRecentClearAllPosition.setOnPreferenceChangeListener(this);
     }
 
+    private void updatePreference() {
+        boolean customRecent = Settings.System.getBoolean(getActivity().getContentResolver(),
+                Settings.System.CUSTOM_RECENT_TOGGLE, false);
+
+        if (customRecent == false) {
+            mRecentPanelLeftyMode.setEnabled(false);
+            mRecentPanelScale.setEnabled(false);
+        } else {
+            mRecentPanelLeftyMode.setEnabled(true);
+            mRecentPanelScale.setEnabled(true);
+
+        }
+    }
+
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
         return true;
     }
 
-    public boolean onPreferenceChange(Preference preference, Object objValue) {
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
         ContentResolver resolver = getActivity().getContentResolver();
         if (preference == mRecentClearAll) {
-            boolean value = (Boolean) objValue;
+            boolean value = (Boolean) newValue;
             Settings.System.putInt(resolver, Settings.System.SHOW_CLEAR_RECENTS_BUTTON, value ? 1 : 0);
             return true;
         } else if (preference == mRecentClearAllPosition) {
-            String value = (String) objValue;
+            String value = (String) newValue;
             Settings.System.putString(resolver, Settings.System.CLEAR_RECENTS_BUTTON_LOCATION, value);
             return true;
         } else if (preference == mRecentsCustom) { // Enable||disable Slim Recent
             Settings.System.putBoolean(resolver,
                     Settings.System.CUSTOM_RECENT_TOGGLE,
-                    ((Boolean) objValue) ? true : false);
+                    ((Boolean) newValue) ? true : false);
+            updatePreference();
             Helpers.restartSystemUI();
+            return true;
+        } else if (preference == mRecentPanelScale) {
+            int value = Integer.parseInt((String) newValue);
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.RECENT_PANEL_SCALE_FACTOR, value);
+            return true;
+        } else if (preference == mRecentPanelLeftyMode) {
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.RECENT_PANEL_GRAVITY,
+                    ((Boolean) newValue) ? Gravity.LEFT : Gravity.RIGHT);
             return true;
         }
         return false;
