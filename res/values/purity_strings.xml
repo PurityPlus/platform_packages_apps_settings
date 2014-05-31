@@ -585,5 +585,7 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="recent_panel_lefty_mode_title">Show on the left edge</string>
     <string name="recent_panel_lefty_mode_summary">Show recent apps panel on the left edge.</string>
 
-
+    <!-- QuickSettings fliptiles -->
+    <string name="flip_qs_tiles_title">Flip tiles</string>
+    <string name="flip_qs_tiles_summary">Flips the tiles on touch</string>
 </resources>

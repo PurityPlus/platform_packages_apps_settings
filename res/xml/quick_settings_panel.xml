@@ -39,6 +39,12 @@
             android:defaultValue="false"
             android:summary="@string/summary_qs_hide_text" />
 
+        <com.android.settings.purity.SystemSettingCheckBoxPreference
+	    android:key="quick_settings_tiles_flip"
+            android:title="@string/flip_qs_tiles_title"
+            android:summary="@string/flip_qs_tiles_summary"
+	    android:defaultValue="false" />
+
     </PreferenceCategory>
 
     <PreferenceCategory
