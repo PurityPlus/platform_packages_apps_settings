@@ -60,8 +60,8 @@
         android:key="notification_category"
         android:title="@string/notification_category" >
 
-        <com.android.settings.purity.SystemSettingCheckBoxPreference
-            android:key="peek_state"
+        <SwitchPreference
+            android:key="notification_peek"
             android:title="@string/notification_peek_title"
             android:summary="@string/notification_peek_summary" />
 
@@ -71,7 +71,7 @@
             android:persistent="false"
             android:entries="@array/peek_pickup_timeout_entries"
             android:entryValues="@array/peek_pickup_timeout_values"
-            android:dependency="peek_state" />
+            android:dependency="notification_peek" />
 
     </PreferenceCategory>
 

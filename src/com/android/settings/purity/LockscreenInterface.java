@@ -44,6 +44,7 @@ import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
+import android.preference.SwitchPreference;
 import android.provider.MediaStore;
 import android.provider.Settings;
 import android.view.Display;
@@ -63,6 +64,7 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
     private static final String KEY_ENABLE_WIDGETS = "keyguard_enable_widgets";
     private static final String KEY_ENABLE_CAMERA = "keyguard_enable_camera";
     private static final String LOCKSCREEN_BACKGROUND_STYLE = "lockscreen_background_style";
+    private static final String KEY_NOTIFICATON_PEEK = "notification_peek";
     private static final String KEY_PEEK_PICKUP_TIMEOUT = "peek_pickup_timeout";
 
     private static final String LOCKSCREEN_WALLPAPER_TEMP_NAME = ".lockwallpaper";
@@ -71,6 +73,7 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
     private CheckBoxPreference mEnableKeyguardWidgets;
     private CheckBoxPreference mEnableCameraWidget;
     private ListPreference mLockBackground;
+    private SwitchPreference mNotificationPeek;
     private ListPreference mPeekPickupTimeout;
 
     private ChooseLockSettingsHelper mChooseLockSettingsHelper;
@@ -95,6 +98,10 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
         // Find preferences
         mEnableKeyguardWidgets = (CheckBoxPreference) findPreference(KEY_ENABLE_WIDGETS);
         mEnableCameraWidget = (CheckBoxPreference) findPreference(KEY_ENABLE_CAMERA);
+
+        mNotificationPeek = (SwitchPreference) findPreference(KEY_NOTIFICATON_PEEK);
+        mNotificationPeek.setChecked(Settings.System.getInt(getContentResolver(), Settings.System.PEEK_STATE, 0) == 1);
+        mNotificationPeek.setOnPreferenceChangeListener(this);
 
         mPeekPickupTimeout = (ListPreference) findPreference(KEY_PEEK_PICKUP_TIMEOUT);
         int peekTimeout = Settings.System.getIntForUser(getContentResolver(),
@@ -179,6 +186,11 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
             int index = mLockBackground.findIndexOfValue((String) objValue);
             handleBackgroundSelection(index);
             return true;
+        } else if (preference == mNotificationPeek) {
+            boolean value = (Boolean) objValue;
+            Settings.System.putInt(cr, Settings.System.PEEK_STATE,
+                   value ? 1 : 0);
+             return true;
         } else if (preference == mPeekPickupTimeout) {
             int peekTimeout = Integer.valueOf((String) objValue);
             Settings.System.putIntForUser(getContentResolver(),
