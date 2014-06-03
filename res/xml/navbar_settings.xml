@@ -43,4 +43,9 @@
             android:max="500"
             android:defaultValue="500" />
 
+        <Preference
+            android:fragment="com.android.settings.purity.NavBarLongPressActions"
+            android:key="navbar_custom_actions"
+            android:title="@string/navbar_long_press_title" />
+
 </PreferenceScreen>
