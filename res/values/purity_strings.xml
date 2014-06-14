@@ -628,4 +628,16 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="floating_blacklist_label">Blacklist from Floating Mode</string>
     <string name="hover_blacklist_label">Blacklist from Hover</string>
 
+    <!-- Hover -->
+    <string name="hover_settings_title">Hover</string>
+    <string name="hover_settings_summary">Hover is an alternative notification system which can be accessed within any app</string>
+    <string name="hover_require_fullscreen_mode_title">Require Fullscreen-Mode</string>
+    <string name="hover_require_fullscreen_mode_summary">Only show up when StatusBar is hidden</string>
+    <string name="hover_exclude_low_priority_title">Exclude low priority</string>
+    <string name="hover_exclude_low_priority_summary">Exclude notifications marked as low priority</string>
+    <string name="hover_exclude_non_clearable_title">Exclude non-clearable</string>
+    <string name="hover_exclude_non_clearable_summary">Exclude not dismissable notifications</string>
+    <string name="hover_exclude_topmost_title">Exclude topmost app</string>
+    <string name="hover_exclude_topmost_summary">Exclude notifications from the app running in foreground</string>
+
 </resources>
