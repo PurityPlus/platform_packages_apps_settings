@@ -65,8 +65,8 @@
         android:id="@+id/wallpaper_settings"
         android:title="@string/wallpaper_settings_title"
         android:icon="@drawable/prd_ic_wallpapers">
-        <intent android:targetPackage="com.cyanogenmod.trebuchet"
-                android:targetClass="com.android.launcher3.WallpaperPickerActivity" />
+        <intent android:targetPackage="com.android.wallpapercropper"
+                android:targetClass="com.android.wallpapercropper.WallpaperPickerActivity" />
     </Preference>
 
     <!-- Lockscreen Wallpaper -->
@@ -74,7 +74,8 @@
         android:id="@+id/lockscreen_wallpaper_settings"
         android:title="@string/lockscreen_wallpaper_settings_title"
         android:icon="@drawable/prd_ic_lockscreen_wallpapers">
-        <!-- TODO: This is not implemented yet -->
+        <intent android:targetPackage="com.android.wallpapercropper"
+                android:targetClass="com.android.wallpapercropper.LockWallpaperPickerActivity" />
     </Preference>
 
     <!-- Boot Animations -->
@@ -95,8 +96,8 @@
         android:icon="@drawable/prd_ic_soundpacks">
         <intent android:action="android.intent.action.MAIN" >
              <category android:name="cyanogenmod.intent.category.APP_THEMES" />
-             <!-- TODO: "mods_sounds" is a placeholder" -->
-             <extra android:name="component_filter" android:value="mods_sounds"/>
+             <extra android:name="component_filter"
+                    android:value="mods_alarms,mods_ringtones,mods_notifications"/>
         </intent>
     </Preference>
 </PreferenceScreen>
