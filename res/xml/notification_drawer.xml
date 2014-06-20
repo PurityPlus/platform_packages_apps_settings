@@ -19,6 +19,12 @@
     android:title="@string/notification_drawer_title"
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
+
+        <PreferenceScreen
+            android:key="heads_up"
+            android:fragment="com.android.settings.headsup.HeadsUpDoNotDisturbSettings"
+            android:title="@string/category_heads_up" />
+
     <ListPreference
         android:key="notification_drawer_collapse_on_dismiss"
         android:title="@string/notification_drawer_collapse_on_dismiss_title"
