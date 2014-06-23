@@ -70,7 +70,7 @@
     <PreferenceScreen
         android:key="hover_settings"
         android:title="@string/hover_settings_title"
-        android:summary="@string/hover_settings_summary"
+        android:icon="@drawable/ic_notify_hover_normal"  
         android:fragment="com.android.settings.purity.HoverSettings" />
 
 </PreferenceScreen>
