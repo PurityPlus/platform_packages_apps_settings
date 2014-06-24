@@ -1572,6 +1572,8 @@
 
         <activity android:name=".notificationlight.BatteryLightSettings" />
 
+        <activity android:name=".headsup.HeadsUpSettings" />
+
         <activity android:name=".purity.AutoBrightnessSetup"
                 android:excludeFromRecents="true"
                 android:theme="@*android:style/Theme.Holo.Dialog.Alert" />
