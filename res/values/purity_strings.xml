@@ -597,6 +597,7 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="recent_panel_expanded_mode_never">Never</string>
     <string name="recent_panel_show_topmost_title">Show topmost task</string>
     <string name="recent_panel_show_topmost_summary">Don\'t exclude the topmost task in recents view</string>
+    <string name="recent_panel_bg_color_title">Background color</string>
 
     <!-- ATTENTION: RTL languages need to replace left with right -->
     <string name="recent_panel_lefty_mode_title">Show on the left edge</string>
@@ -689,4 +690,20 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="network_traffic_autohide">Hide on Inactivity</string>
     <string name="network_traffic_autohide_summary">Hide the traffic monitor when there is no activity</string>
     <string name="network_traffic_autohide_threshold">Inactivity threshold</string>
+
+    <!-- Color Picker -->
+    <string name="dialog_color_picker">Color Picker</string>
+    <string name="press_color_to_apply">Press on color below to apply</string>
+    <string name="arrow_right">→</string>
+    <string name="arrow_down">↓</string>
+    <string name="hex">Hex:</string>
+    <string name="hex_hint">#ff000000</string>
+    <string name="set">Set</string>
+    <string name="color_default">Default</string>
+
+    <!-- Misc Strings -->
+    <string name="shortcut_action_reset">Reset</string>
+    <string name="shortcut_action_reset_message">Reset all entries to default?</string>
+    <string name="qs_style_reset_message">Reset all quick settings colors to default?</string>
+
 </resources>
