@@ -26,8 +26,6 @@ import android.view.Gravity;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
-import com.android.settings.purity.SystemSettingSwitchPreference;
-
 public class NotificationSettings extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener {
     private static final String TAG = "NotificationSettings";
@@ -37,7 +35,7 @@ public class NotificationSettings extends SettingsPreferenceFragment implements
     private static final String PREF_HOVER_EXCLUDE_LOW_PRIORITY = "hover_exclude_low_priority";
     private static final String PREF_HOVER_EXCLUDE_TOPMOST = "hover_exclude_topmost";
 
-    private SystemSettingSwitchPreference mSwitchPreference;
+    private Preference mHeadsUp;
     private ListPreference mHoverLongFadeOutDelay;
     private CheckBoxPreference mHoverExcludeNonClearable;
     private CheckBoxPreference mHoverExcludeNonLowPriority;
@@ -48,12 +46,10 @@ public class NotificationSettings extends SettingsPreferenceFragment implements
         super.onCreate(savedInstanceState);
 
         addPreferencesFromResource(R.xml.notification_settings);
-        PreferenceScreen prefSet = getPreferenceScreen();
 
-        mSwitchPreference = (SystemSettingSwitchPreference)
-                findPreference(Settings.System.HEADS_UP_NOTIFICATION);
+        mHeadsUp = findPreference(Settings.System.HEADS_UP_NOTIFICATION);
 
-        mHoverLongFadeOutDelay = (ListPreference) prefSet.findPreference(PREF_HOVER_LONG_FADE_OUT_DELAY);
+        mHoverLongFadeOutDelay = (ListPreference) findPreference(PREF_HOVER_LONG_FADE_OUT_DELAY);
         int hoverLongFadeOutDelay = Settings.System.getIntForUser(getContentResolver(),
                 Settings.System.HOVER_LONG_FADE_OUT_DELAY, 5000, UserHandle.USER_CURRENT);
         mHoverLongFadeOutDelay.setValue(String.valueOf(hoverLongFadeOutDelay));
@@ -81,10 +77,10 @@ public class NotificationSettings extends SettingsPreferenceFragment implements
     @Override
     public void onResume() {
         super.onResume();
-        boolean headsUpEnabled = Settings.System.getIntForUser(
-                getActivity().getContentResolver(),
-                Settings.System.HEADS_UP_NOTIFICATION, 0, UserHandle.USER_CURRENT) == 1;
-        mSwitchPreference.setChecked(headsUpEnabled);
+        boolean headsUpEnabled = Settings.System.getInt(
+                getContentResolver(), Settings.System.HEADS_UP_NOTIFICATION, 0) == 1;
+        mHeadsUp.setSummary(headsUpEnabled
+                ? R.string.summary_heads_up_enabled : R.string.summary_heads_up_disabled);
         UpdateSettings();
     }
 
