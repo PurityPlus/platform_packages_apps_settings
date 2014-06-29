@@ -55,7 +55,7 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
     private CheckBoxPreference mEnableKeyguardWidgets;
     private CheckBoxPreference mEnableCameraWidget;
     private ListPreference mLockBackground;
-    private SwitchPreference mNotificationPeek;
+    private CheckBoxPreference mNotificationPeek;
     private ListPreference mPeekPickupTimeout;
     private ListPreference mPeekWakeTimeout;
 
@@ -80,7 +80,7 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
         mEnableKeyguardWidgets = (CheckBoxPreference) findPreference(KEY_ENABLE_WIDGETS);
         mEnableCameraWidget = (CheckBoxPreference) findPreference(KEY_ENABLE_CAMERA);
 
-        mNotificationPeek = (SwitchPreference) findPreference(KEY_NOTIFICATON_PEEK);
+        mNotificationPeek = (CheckBoxPreference) findPreference(KEY_NOTIFICATON_PEEK);
         mNotificationPeek.setChecked(Settings.System.getInt(getContentResolver(), Settings.System.PEEK_STATE, 0) == 1);
         mNotificationPeek.setOnPreferenceChangeListener(this);
 

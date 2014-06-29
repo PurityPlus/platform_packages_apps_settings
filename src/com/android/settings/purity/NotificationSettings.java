@@ -4,6 +4,9 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -16,31 +19,32 @@ import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
+import android.preference.RingtonePreference;
 import android.provider.Settings;
 import android.view.Gravity;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
-public class HoverSettings extends SettingsPreferenceFragment implements
+public class NotificationSettings extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener {
-    private static final String TAG = "HoverSettings";
+    private static final String TAG = "NotificationSettings";
 
     private static final String PREF_HOVER_LONG_FADE_OUT_DELAY = "hover_long_fade_out_delay";
     private static final String PREF_HOVER_EXCLUDE_NON_CLEARABLE = "hover_exclude_non_clearable";
     private static final String PREF_HOVER_EXCLUDE_LOW_PRIORITY = "hover_exclude_low_priority";
     private static final String PREF_HOVER_EXCLUDE_TOPMOST = "hover_exclude_topmost";
 
-    ListPreference mHoverLongFadeOutDelay;
-    CheckBoxPreference mHoverExcludeNonClearable;
-    CheckBoxPreference mHoverExcludeNonLowPriority;
-    CheckBoxPreference mHoverExcludeTopmost;
+    private ListPreference mHoverLongFadeOutDelay;
+    private CheckBoxPreference mHoverExcludeNonClearable;
+    private CheckBoxPreference mHoverExcludeNonLowPriority;
+    private CheckBoxPreference mHoverExcludeTopmost;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        addPreferencesFromResource(R.xml.hover_settings);
+        addPreferencesFromResource(R.xml.notification_settings);
         PreferenceScreen prefSet = getPreferenceScreen();
 
         mHoverLongFadeOutDelay = (ListPreference) prefSet.findPreference(PREF_HOVER_LONG_FADE_OUT_DELAY);
