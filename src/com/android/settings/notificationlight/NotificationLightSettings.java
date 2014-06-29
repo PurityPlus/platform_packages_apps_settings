@@ -80,6 +80,9 @@ public class NotificationLightSettings extends SettingsPreferenceFragment implem
     private int mDefaultLedOn;
     private int mDefaultLedOff;
     private PackageManager mPackageManager;
+    private boolean mCustomEnabled;
+    private boolean mLightEnabled;
+    private boolean mVoiceCapable;
     private PreferenceGroup mApplicationPrefList;
     private CheckBoxPreference mEnabledPref;
     private CheckBoxPreference mCustomEnabledPref;
