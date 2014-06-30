@@ -533,4 +533,14 @@ Mittels \"Entfernen\" kann die ausgewählte Stützstelle aus dem Helligkeitsverl
 
     <!-- Navigation bar glow time -->
     <string name="navigation_button_glow_time_title">Leuchtdauer</string>
+    <string name="category_heads_up">Pop-up-Benachrichtigungen</string>
+    <string name="summary_heads_up_enabled">Pop-up-Benachrichtigungen sind aktiviert</string>
+    <string name="summary_heads_up_disabled">Pop-up-Benachrichtigungen sind deaktiviert</string>
+    <string name="add_heads_up_package">App hinzufügen</string>
+    <string name="add_heads_up_dnd_summary">Pop-up-Benachrichtigungen in diesen Apps nicht anzeigen</string>
+    <string name="add_heads_up_blacklist_summary">Pop-up-Benachrichtigungen von diesen Apps nicht anzeigen</string>
+    <string name="heads_up_dnd_title">Nicht stören</string>
+    <string name="heads_up_blacklist_title">Sperrliste</string>
+    <string name="heads_up_disabled_notice">Pop-up-Benachrichtigungen aktivieren, um Apps zu ermöglichen, interaktive Benachrichtigungen in einem Pop-up-Fenster darzustellen.</string>
+    <string name="title_tile_heads_up">Pop-up-Benachrichtigungen</string>
 </resources>

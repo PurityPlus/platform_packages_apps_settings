@@ -530,4 +530,14 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="background_result_successful">Se ha cambiado el fondo de pantalla</string>
     <string name="background_result_not_successful">No se ha cambiado el fondo de pantalla</string>
     <string name="setting_lockscreen_background">Aplicando fondo de pantalla</string>
+    <string name="category_heads_up">Notificaciones emergentes</string>
+    <string name="summary_heads_up_enabled">Las notificaciones emergentes están habilitadas</string>
+    <string name="summary_heads_up_disabled">Las notificaciones emergentes están deshabilitadas</string>
+    <string name="add_heads_up_package">Añadir aplicación</string>
+    <string name="add_heads_up_dnd_summary">No mostrar notificaciones emergentes en estas aplicaciones</string>
+    <string name="add_heads_up_blacklist_summary">No mostrar notificaciones emergentes de estas aplicaciones</string>
+    <string name="heads_up_dnd_title">No molestar</string>
+    <string name="heads_up_blacklist_title">Lista negra</string>
+    <string name="heads_up_disabled_notice">Para permitir a las aplicaciones mostrar notificaciones interactivas en ventanas emergentes, habilita las notificaciones emergentes.</string>
+    <string name="title_tile_heads_up">Notificaciones emergentes</string>
 </resources>
