@@ -550,7 +550,6 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="background_result_not_successful">Background not changed</string>
     <string name="setting_lockscreen_background">Applying background</string>
 
-<<<<<<< HEAD
     <!-- Themes settings  -->
     <string name="themes_settings_title">Themes</string>
     <string name="themes_settings_summary">Change themes with T-Mobiles theme engine</string>
@@ -566,6 +565,7 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
 
     <!--Notification category-->
     <string name="notification_category">Notifications</string>
+
     <!--Notification peek-->
     <string name="notification_peek_title">Notification peek</string>
     <string name="notification_peek_summary">Show latest notification after picking up your device</string>

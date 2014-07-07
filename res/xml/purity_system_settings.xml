@@ -67,10 +67,4 @@
         android:icon="@drawable/ic_settings_recents"  
         android:fragment="com.android.settings.purity.RecentsPanelSettings" />
 
-    <PreferenceScreen
-        android:key="hover_settings"
-        android:title="@string/hover_settings_title"
-        android:icon="@drawable/ic_notify_hover_normal"  
-        android:fragment="com.android.settings.purity.HoverSettings" />
-
 </PreferenceScreen>
