@@ -297,7 +297,8 @@
     <!-- Notification light dialogs -->
     <string name="edit_light_settings">Modifica impostazioni luci</string>
     <string name="pulse_speed_title">Durata e velocità del lampeggio</string>
-    <string name="default_time"Personalizzato</string>
+    <string name="default_time">Normale</string>
+    <string name="custom_time">Personalizzato</string>
     <string name="dialog_delete_message">Rimuovere elemento selezionato?</string>
 
     <!-- Values for the notification light pulse spinners -->
