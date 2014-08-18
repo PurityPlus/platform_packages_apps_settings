@@ -33,21 +33,21 @@ import android.util.Log;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
-import com.android.settings.purity.chameleonos.SeekBarPreference;
-
 public class StatusBar extends SettingsPreferenceFragment implements OnPreferenceChangeListener {
 
     private static final String TAG = "StatusBarSettings";
 
-    private static final String STATUS_BAR_NETWORK_ACTIVITY = "status_bar_network_activity";
     private static final String KEY_STATUS_BAR_CLOCK = "clock_style_pref";
     private static final String STATUS_BAR_BRIGHTNESS_CONTROL = "status_bar_brightness_control";
     private static final String DOUBLE_TAP_SLEEP_GESTURE = "double_tap_sleep_gesture";
+    private static final String STATUS_BAR_NETWORK_ACTIVITY = "status_bar_network_activity";
+    private static final String STATUS_BAR_TRAFFIC = "status_bar_traffic";
 
-    private CheckBoxPreference mStatusBarNetworkActivity;
     private PreferenceScreen mClockStyle;
     private CheckBoxPreference mStatusBarBrightnessControl;
     private CheckBoxPreference mStatusBarDoubleTapSleepGesture;
+    private CheckBoxPreference mStatusBarNetworkActivity;
+    private CheckBoxPreference mStatusBarTraffic;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -77,15 +77,21 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
             updateClockStyleDescription();
         }
 
+        mStatusBarDoubleTapSleepGesture = (CheckBoxPreference) findPreference(DOUBLE_TAP_SLEEP_GESTURE);
+        mStatusBarDoubleTapSleepGesture.setChecked(Settings.System.getInt(getContentResolver(),
+            Settings.System.DOUBLE_TAP_SLEEP_GESTURE, 0) == 1);
+        mStatusBarDoubleTapSleepGesture.setOnPreferenceChangeListener(this);
+
         mStatusBarNetworkActivity = (CheckBoxPreference) prefSet.findPreference(STATUS_BAR_NETWORK_ACTIVITY);
         mStatusBarNetworkActivity.setChecked(Settings.System.getInt(resolver,
             Settings.System.STATUS_BAR_NETWORK_ACTIVITY, 0) == 1);
         mStatusBarNetworkActivity.setOnPreferenceChangeListener(this);
 
-        mStatusBarDoubleTapSleepGesture = (CheckBoxPreference) findPreference(DOUBLE_TAP_SLEEP_GESTURE);
-        mStatusBarDoubleTapSleepGesture.setChecked(Settings.System.getInt(getContentResolver(),
-            Settings.System.DOUBLE_TAP_SLEEP_GESTURE, 0) == 1);
-        mStatusBarDoubleTapSleepGesture.setOnPreferenceChangeListener(this);
+        mStatusBarTraffic = (CheckBoxPreference) prefSet.findPreference(STATUS_BAR_TRAFFIC);
+        int intState = Settings.System.getInt(resolver, Settings.System.STATUS_BAR_TRAFFIC, 0);
+        intState = setStatusBarTrafficSummary(intState);
+        mStatusBarTraffic.setChecked(intState > 0);
+        mStatusBarTraffic.setOnPreferenceChangeListener(this);
 
     }
 
@@ -95,17 +101,22 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
         if (preference == mStatusBarBrightnessControl) {
             boolean value = (Boolean) objValue;
             Settings.System.putInt(resolver,Settings.System.STATUS_BAR_BRIGHTNESS_CONTROL, value ? 1 : 0);
-            return true;
-       } else if (preference == mStatusBarNetworkActivity) {
-            boolean value = (Boolean) objValue;
-            Settings.System.putInt(resolver,
-                Settings.System.STATUS_BAR_NETWORK_ACTIVITY, value ? 1 : 0);
-            return true;
        } else if (preference == mStatusBarDoubleTapSleepGesture) {
             boolean value = (Boolean) objValue;
             Settings.System.putInt(resolver,
                 Settings.System.DOUBLE_TAP_SLEEP_GESTURE, value ? 1 : 0);
-            return true;
+       } else if (preference == mStatusBarNetworkActivity) {
+            boolean value = (Boolean) objValue;
+            Settings.System.putInt(resolver,
+                Settings.System.STATUS_BAR_NETWORK_ACTIVITY, value ? 1 : 0);
+        } else if (preference == mStatusBarTraffic) {
+
+            // Increment the state and then update the label
+            int intState = Settings.System.getInt(resolver, Settings.System.STATUS_BAR_TRAFFIC, 0);
+            intState++;
+            intState = setStatusBarTrafficSummary(intState);
+            Settings.System.putInt(resolver, Settings.System.STATUS_BAR_TRAFFIC, intState);
+            if (intState > 1) {return false;}        
         } else {
             return false;
         }
@@ -126,5 +137,17 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
         } else {
             mClockStyle.setSummary(getString(R.string.disabled));
         }
+    }
+    private int setStatusBarTrafficSummary(int intState) {
+        // These states must match com.android.systemui.statusbar.policy.Traffic
+        if (intState == 1) {
+            mStatusBarTraffic.setSummary(R.string.show_network_speed_bits);
+        } else if (intState == 2) {
+            mStatusBarTraffic.setSummary(R.string.show_network_speed_bytes);
+        } else {
+            mStatusBarTraffic.setSummary(R.string.show_network_speed_summary);
+            return 0;
+        }
+        return intState;
     }
 }

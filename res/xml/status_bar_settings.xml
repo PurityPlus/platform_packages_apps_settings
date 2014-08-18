@@ -39,12 +39,6 @@
         android:key="status_bar_general"
         android:title="@string/status_bar_general_title">
 
-    <CheckBoxPreference
-            android:key="status_bar_network_activity"
-            android:title="@string/show_activity_indicators_on_status_bar_title"
-            android:summary="@string/show_activity_indicators_on_status_bar_summary"
-            android:defaultValue="false" />
-
         <CheckBoxPreference
             android:key="status_bar_brightness_control"
             android:title="@string/status_bar_toggle_brightness"
@@ -58,12 +52,20 @@
 
     </PreferenceCategory>
 
-        <PreferenceScreen
-            android:key="network_usage_stats"
-            android:fragment="com.android.settings.purity.NetworkUsageStats"
-            android:title="@string/network_traffic_title"
-            android:summary="@string/network_traffic_summary" />
+    <PreferenceCategory
+        android:title="@string/title_network_traffic">
 
+        <CheckBoxPreference
+            android:key="status_bar_network_activity"
+            android:title="@string/show_activity_indicators_on_status_bar_title"
+            android:summary="@string/show_activity_indicators_on_status_bar_summary"
+            android:defaultValue="false" />
+
+        <CheckBoxPreference
+            android:key="status_bar_traffic"
+            android:title="@string/show_network_speed"
+            android:summary="@string/show_network_speed_summary"
+            android:persistent="false" />
     </PreferenceCategory>
 
 </PreferenceScreen>
