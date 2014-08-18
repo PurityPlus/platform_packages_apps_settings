@@ -58,25 +58,11 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory
-        android:title="@string/title_network_traffic">
-
-	<CheckBoxPreference
-                android:key="network_stats"
-                android:title="@string/status_bar_show_network_stats_title"
-                android:summary="@string/status_bar_show_network_stats_summary"
-                android:persistent="false" />
-
-        <com.android.settings.purity.chameleonos.SeekBarPreference
-                android:key="network_stats_update_frequency"
-                android:title="@string/status_bar_network_stats_update_title"
-                android:summary="@string/status_bar_network_stats_update_summary"
-                android:max="2500"
-                settings:interval="50"
-                settings:min="250"
-                settings:unitsLeft=""
-                settings:unitsRight="ms"
-                android:persistent="false" />
+        <PreferenceScreen
+            android:key="network_usage_stats"
+            android:fragment="com.android.settings.purity.NetworkUsageStats"
+            android:title="@string/network_traffic_title"
+            android:summary="@string/network_traffic_summary" />
 
     </PreferenceCategory>
 

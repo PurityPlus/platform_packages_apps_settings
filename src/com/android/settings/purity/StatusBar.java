@@ -42,15 +42,11 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
     private static final String STATUS_BAR_NETWORK_ACTIVITY = "status_bar_network_activity";
     private static final String KEY_STATUS_BAR_CLOCK = "clock_style_pref";
     private static final String STATUS_BAR_BRIGHTNESS_CONTROL = "status_bar_brightness_control";
-    private static final String NETWORK_STATS = "network_stats";
-    private static final String NETWORK_STATS_UPDATE_FREQUENCY = "network_stats_update_frequency";
     private static final String DOUBLE_TAP_SLEEP_GESTURE = "double_tap_sleep_gesture";
 
     private CheckBoxPreference mStatusBarNetworkActivity;
     private PreferenceScreen mClockStyle;
     private CheckBoxPreference mStatusBarBrightnessControl;
-    private CheckBoxPreference mNetworkStats;
-    private SeekBarPreference mNetworkStatsUpdateFrequency;
     private CheckBoxPreference mStatusBarDoubleTapSleepGesture;
 
     @Override
@@ -86,17 +82,6 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
             Settings.System.STATUS_BAR_NETWORK_ACTIVITY, 0) == 1);
         mStatusBarNetworkActivity.setOnPreferenceChangeListener(this);
 
-        mNetworkStats = (CheckBoxPreference) prefSet.findPreference(NETWORK_STATS);
-        mNetworkStats.setChecked(Settings.System.getInt(resolver,
-                Settings.System.STATUS_BAR_NETWORK_STATS, 0) == 1);
-        mNetworkStats.setOnPreferenceChangeListener(this);
-
-        mNetworkStatsUpdateFrequency = (SeekBarPreference)
-                prefSet.findPreference(NETWORK_STATS_UPDATE_FREQUENCY);
-        mNetworkStatsUpdateFrequency.setValue(Settings.System.getInt(resolver,
-                Settings.System.STATUS_BAR_NETWORK_STATS_UPDATE_INTERVAL, 500));
-        mNetworkStatsUpdateFrequency.setOnPreferenceChangeListener(this);
-
         mStatusBarDoubleTapSleepGesture = (CheckBoxPreference) findPreference(DOUBLE_TAP_SLEEP_GESTURE);
         mStatusBarDoubleTapSleepGesture.setChecked(Settings.System.getInt(getContentResolver(),
             Settings.System.DOUBLE_TAP_SLEEP_GESTURE, 0) == 1);
@@ -115,15 +100,6 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
             boolean value = (Boolean) objValue;
             Settings.System.putInt(resolver,
                 Settings.System.STATUS_BAR_NETWORK_ACTIVITY, value ? 1 : 0);
-            return true;
-        } else if (preference == mNetworkStats) {
-            boolean value = (Boolean) objValue;
-            Settings.System.putInt(resolver, Settings.System.STATUS_BAR_NETWORK_STATS,
-                    value ? 1 : 0);
-        } else if (preference == mNetworkStatsUpdateFrequency) {
-            int i = Integer.valueOf((Integer) objValue);
-            Settings.System.putInt(resolver,
-                    Settings.System.STATUS_BAR_NETWORK_STATS_UPDATE_INTERVAL, i);
             return true;
        } else if (preference == mStatusBarDoubleTapSleepGesture) {
             boolean value = (Boolean) objValue;
