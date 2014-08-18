@@ -53,7 +53,7 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="@string/title_network_traffic">
+        android:title="@string/network_traffic_title">
 
         <CheckBoxPreference
             android:key="status_bar_network_activity"
@@ -61,11 +61,27 @@
             android:summary="@string/show_activity_indicators_on_status_bar_summary"
             android:defaultValue="false" />
 
-        <CheckBoxPreference
-            android:key="status_bar_traffic"
-            android:title="@string/show_network_speed"
-            android:summary="@string/show_network_speed_summary"
-            android:persistent="false" />
+        <ListPreference
+                android:key="network_traffic_state"
+                android:title="@string/show_network_traffic_state"
+                android:entries="@array/show_network_traffic_state_entries"
+                android:entryValues="@array/show_network_traffic_state_values"
+                android:persistent="false" />
+
+        <ListPreference
+                android:key="network_traffic_unit"
+                android:title="@string/show_network_traffic_unit"
+                android:entries="@array/show_network_traffic_unit_entries"
+                android:entryValues="@array/show_network_traffic_unit_values"
+                android:persistent="false" />
+
+        <ListPreference
+                android:key="network_traffic_period"
+                android:title="@string/show_network_traffic_frequency"
+                android:entries="@array/show_network_traffic_frequency_entries"
+                android:entryValues="@array/show_network_traffic_frequency_values"
+                android:persistent="false" />
+
     </PreferenceCategory>
 
 </PreferenceScreen>
