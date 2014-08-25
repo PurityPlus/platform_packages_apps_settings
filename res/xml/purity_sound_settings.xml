@@ -25,18 +25,17 @@
         android:summary="@string/safe_headset_volume_summary"
         android:defaultValue="true" />
 
-    <CheckBoxPreference
+    <com.android.settings.purity.SystemSettingCheckBoxPreference
         android:key="volbtn_music_controls"
         android:title="@string/volbtn_music_controls_title"
         android:summary="@string/volbtn_music_controls_summary"
-        android:persistent="false" />
+        android:defaultValue="false" />
 
-    <CheckBoxPreference
+    <com.android.settings.purity.SystemSettingCheckBoxPreference
         android:key="volume_keys_control_media_stream"
         android:title="@string/volume_keys_control_media_stream"
         android:summary="@string/volume_keys_control_media_stream_summary"
-        android:defaultValue="false"
-        android:persistent="false" />
+        android:defaultValue="false" />
 
     <PreferenceCategory
             android:title="@string/power_notifications_category_title"/>
@@ -45,8 +44,7 @@
             android:key="power_notifications"
             android:title="@string/power_notifications_enable_title"
             android:summary="@string/power_notifications_enable_summary"
-            android:defaultValue="false"
-            android:persistent="false" />
+            android:defaultValue="false" />
 
     <CheckBoxPreference
             android:key="power_notifications_vibrate"

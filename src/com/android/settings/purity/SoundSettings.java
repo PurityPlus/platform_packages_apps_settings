@@ -59,23 +59,16 @@ public class SoundSettings extends SettingsPreferenceFragment implements
     // Used for power notification uri string if set to silent
     private static final String POWER_NOTIFICATIONS_SILENT_URI = "silent";
 
-    private CheckBoxPreference mVolBtnMusicCtrl;
     private CheckBoxPreference mSafeHeadsetVolume;
     private CheckBoxPreference mPowerSounds;
     private CheckBoxPreference mPowerSoundsVibrate;
     private Preference mPowerSoundsRingtone;
-    private CheckBoxPreference mVolumeKeysControlMedia;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         addPreferencesFromResource(R.xml.purity_sound_settings);
-
-        mVolBtnMusicCtrl = (CheckBoxPreference) findPreference(KEY_VOLBTN_MUSIC_CTRL);
-        mVolBtnMusicCtrl.setChecked(Settings.System.getInt(getContentResolver(),
-                Settings.System.VOLUME_MUSIC_CONTROLS, 1) != 0);
-        mVolBtnMusicCtrl.setOnPreferenceChangeListener(this);
 
         mSafeHeadsetVolume = (CheckBoxPreference) findPreference(KEY_SAFE_HEADSET_VOLUME);
         mSafeHeadsetVolume.setChecked(Settings.System.getInt(getContentResolver(),
@@ -121,11 +114,6 @@ public class SoundSettings extends SettingsPreferenceFragment implements
                 mPowerSoundsRingtone.setSummary(ringtone.getTitle(getActivity()));
             }
         }
-
-        mVolumeKeysControlMedia = (CheckBoxPreference) findPreference(KEY_VOL_MEDIA);
-        mVolumeKeysControlMedia.setChecked(Settings.System.getInt(getContentResolver(),
-                Settings.System.VOLUME_KEYS_CONTROL_MEDIA_STREAM, 0) != 0);
-        mVolumeKeysControlMedia.setOnPreferenceChangeListener(this);
     }
 
     @Override
@@ -148,12 +136,6 @@ public class SoundSettings extends SettingsPreferenceFragment implements
 
     public boolean onPreferenceChange(Preference preference, Object objValue) {
         final String key = preference.getKey();
-        if (KEY_VOLBTN_MUSIC_CTRL.equals(key)) {
-            Settings.System.putInt(getContentResolver(),
-                    Settings.System.VOLUME_MUSIC_CONTROLS,
-                    (Boolean) objValue ? 1 : 0);
-        }
-
         if (KEY_SAFE_HEADSET_VOLUME.equals(key)) {
             if ((Boolean) objValue) {
                 Settings.System.putInt(getContentResolver(),
@@ -173,11 +155,6 @@ public class SoundSettings extends SettingsPreferenceFragment implements
                     Settings.Global.POWER_NOTIFICATIONS_VIBRATE,
                     (Boolean) objValue ? 1 : 0);
 
-        }
-        if (KEY_VOL_MEDIA.equals(key)) {
-            Settings.System.putInt(getContentResolver(),
-                    Settings.System.VOLUME_KEYS_CONTROL_MEDIA_STREAM,
-                    (Boolean) objValue ? 1 : 0);
         }
         return true;
     }
