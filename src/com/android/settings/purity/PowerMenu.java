@@ -19,7 +19,6 @@ package com.android.settings.purity;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.UserHandle;
-import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
@@ -33,18 +32,9 @@ public class PowerMenu extends SettingsPreferenceFragment implements
         OnPreferenceChangeListener {
     private static final String TAG = "PowerMenu";
 
-    private static final String KEY_REBOOT = "power_menu_reboot";
-    private static final String KEY_SCREENSHOT = "power_menu_screenshot";
     private static final String KEY_EXPANDED_DESKTOP = "power_menu_expanded_desktop";
-    private static final String KEY_AIRPLANE = "power_menu_airplane";
-    private static final String KEY_USER = "power_menu_user";
-    private static final String KEY_SILENT = "power_menu_silent";
 
-    private CheckBoxPreference mRebootPref;
-    private CheckBoxPreference mScreenshotPref;
     ListPreference mExpandedDesktopPref;
-    private CheckBoxPreference mAirplanePref;
-    private CheckBoxPreference mSilentPref;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -52,28 +42,12 @@ public class PowerMenu extends SettingsPreferenceFragment implements
 
         addPreferencesFromResource(R.xml.power_menu_settings);
 
-        mRebootPref = (CheckBoxPreference) findPreference(KEY_REBOOT);
-        mRebootPref.setChecked((Settings.System.getInt(getContentResolver(),
-                Settings.System.POWER_MENU_REBOOT_ENABLED, 1) == 1));
-
-        mScreenshotPref = (CheckBoxPreference) findPreference(KEY_SCREENSHOT);
-        mScreenshotPref.setChecked((Settings.System.getInt(getContentResolver(),
-                Settings.System.POWER_MENU_SCREENSHOT_ENABLED, 0) == 1));
-
         PreferenceScreen prefSet = getPreferenceScreen();
         mExpandedDesktopPref = (ListPreference) prefSet.findPreference(KEY_EXPANDED_DESKTOP);
         mExpandedDesktopPref.setOnPreferenceChangeListener(this);
         int expandedDesktopValue = Settings.System.getInt(getContentResolver(), Settings.System.EXPANDED_DESKTOP_STYLE, 0);
         mExpandedDesktopPref.setValue(String.valueOf(expandedDesktopValue));
         updateExpandedDesktopSummary(expandedDesktopValue);
-
-        mAirplanePref = (CheckBoxPreference) findPreference(KEY_AIRPLANE);
-        mAirplanePref.setChecked((Settings.System.getInt(getContentResolver(),
-                Settings.System.POWER_MENU_AIRPLANE_ENABLED, 1) == 1));
-
-        mSilentPref = (CheckBoxPreference) findPreference(KEY_SILENT);
-        mSilentPref.setChecked((Settings.System.getInt(getContentResolver(),
-                Settings.System.POWER_MENU_SILENT_ENABLED, 1) == 1));
 
     }
 
@@ -86,37 +60,6 @@ public class PowerMenu extends SettingsPreferenceFragment implements
             return true;
         }
         return false;
-    }
-
-    @Override
-    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
-        boolean value;
-
-        if (preference == mScreenshotPref) {
-            value = mScreenshotPref.isChecked();
-            Settings.System.putInt(getContentResolver(),
-                    Settings.System.POWER_MENU_SCREENSHOT_ENABLED,
-                    value ? 1 : 0);
-        } else if (preference == mRebootPref) {
-            value = mRebootPref.isChecked();
-            Settings.System.putInt(getContentResolver(),
-                    Settings.System.POWER_MENU_REBOOT_ENABLED,
-                    value ? 1 : 0);
-       } else if (preference == mAirplanePref) {
-            value = mAirplanePref.isChecked();
-            Settings.System.putInt(getContentResolver(),
-                    Settings.System.POWER_MENU_AIRPLANE_ENABLED,
-                    value ? 1 : 0);
-       } else if (preference == mSilentPref) {
-            value = mSilentPref.isChecked();
-            Settings.System.putInt(getContentResolver(),
-                    Settings.System.POWER_MENU_SILENT_ENABLED,
-                    value ? 1 : 0);
-        } else {
-            return super.onPreferenceTreeClick(preferenceScreen, preference);
-        }
-
-        return true;
     }
 
     private void updateExpandedDesktopSummary(int value) {
