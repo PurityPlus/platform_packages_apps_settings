@@ -736,6 +736,6 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <!-- Misc Strings -->
     <string name="shortcut_action_reset">Reset</string>
     <string name="shortcut_action_reset_message">Reset all entries to default?</string>
-    <string name="qs_style_reset_message">Reset all quick settings colors to default?</string>
+    <string name="qs_style_reset_message">Reset colors to default?</string>
 
 </resources>
