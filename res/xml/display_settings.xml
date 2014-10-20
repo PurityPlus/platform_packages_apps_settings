@@ -57,6 +57,11 @@
                 android:entries="@array/screen_off_animation_entries"
                 android:entryValues="@array/screen_off_animation_values" />
 
+	<PreferenceScreen
+                android:key="dynamic_statusbar"
+                android:fragment="com.android.settings.purity.DsbSettings"
+                android:title="@string/dynamic_status_bar_title" />
+
         <PreferenceCategory
             android:key="lights_prefs"
             android:title="@string/lights_category_title">
